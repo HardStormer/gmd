@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: build
-          path: build/
+          path: ./build/
   deploy:
     name: 🎉 Deploy
     needs: build
@@ -39,7 +39,7 @@ jobs:
         uses: actions/download-artifact@main
         with:
           name: build
-          path: /
+          path: ./
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
