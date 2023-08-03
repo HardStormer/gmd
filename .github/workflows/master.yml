@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: 🚀 CI/CD .NET
+name: 🚀 CI/CD REACT
 
 on:
   push:
@@ -28,8 +28,8 @@ jobs:
       - name: Archive production artifact
         uses: actions/upload-artifact@main
         with:
-          name: app
-          path: /cra-app/
+          name: build
+          path: /build/
   deploy:
     name: 🎉 Deploy
     needs: build
@@ -38,8 +38,8 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@main
         with:
-          name: app
-          path: /cra-app/
+          name: build
+          path: /build/
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
