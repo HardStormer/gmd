@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: app
-          path: /cra-app
+          path: /cra-app/
   deploy:
     name: 🎉 Deploy
     needs: build
@@ -39,7 +39,7 @@ jobs:
         uses: actions/download-artifact@main
         with:
           name: app
-          path: /cra-app
+          path: /cra-app/
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
