@@ -1,7 +1,7 @@
 import axios from "axios";
 import {paths} from "../../../../generated/privateMessanger-api-types-v1";
 
-const Host = "https://localhost:5001"
+const Host = "https://messenger-api.guzeevmd.ru"
 
 type ValudUrl = keyof paths
 
