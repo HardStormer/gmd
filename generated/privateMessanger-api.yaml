@@ -1,0 +1,1424 @@
+openapi: 3.0.1
+info:
+  title: Private Messanger Api
+  version: v1
+paths:
+  /Message/GetAllPagedByText:
+    get:
+      tags:
+        - Message
+      summary: метод предназначен для получения пагинированного списка элементов
+      parameters:
+        - name: Text
+          in: query
+          schema:
+            type: string
+        - name: Limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: Offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageListViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageListViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageListViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Message/GetAllPaged:
+    get:
+      tags:
+        - Message
+      summary: метод предназначен для получения пагинированного списка элементов
+      parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: Offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageListViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageListViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageListViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Message/Get:
+    get:
+      tags:
+        - Message
+      summary: метод предназначен для получения отдельного элемента данных
+      parameters:
+        - name: Id
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Message/Create:
+    post:
+      tags:
+        - Message
+      summary: метод предназначен для создания нового элемента данных
+      requestBody:
+        description: экземпляр
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Message/Edit:
+    put:
+      tags:
+        - Message
+      summary: метод предназначен для редактирования элемента данных
+      requestBody:
+        description: экземпляр
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMessageCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMessageCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateMessageCommand'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Message/Delete:
+    delete:
+      tags:
+        - Message
+      summary: метод предназначен удаления отдельного элемента данных
+      requestBody:
+        description: идентификатор типа Guid и параметр определяющий тип удаления (по умолчанию true)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMessageCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMessageCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteMessageCommand'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Room/GetAllPagedByName:
+    get:
+      tags:
+        - Room
+      summary: метод предназначен для получения пагинированного списка элементов
+      parameters:
+        - name: Name
+          in: query
+          schema:
+            type: string
+        - name: Limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: Offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RoomListViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomListViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RoomListViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Room/GetAllPaged:
+    get:
+      tags:
+        - Room
+      summary: метод предназначен для получения пагинированного списка элементов
+      parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: Offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RoomListViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomListViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RoomListViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Room/Get:
+    get:
+      tags:
+        - Room
+      summary: метод предназначен для получения отдельного элемента данных
+      parameters:
+        - name: Id
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RoomViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RoomViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Room/Create:
+    post:
+      tags:
+        - Room
+      summary: метод предназначен для создания нового элемента данных
+      requestBody:
+        description: экземпляр
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoomCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoomCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateRoomCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RoomViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RoomViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Room/Edit:
+    put:
+      tags:
+        - Room
+      summary: метод предназначен для редактирования элемента данных
+      requestBody:
+        description: экземпляр
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoomCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoomCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoomCommand'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /Room/Delete:
+    delete:
+      tags:
+        - Room
+      summary: метод предназначен удаления отдельного элемента данных
+      requestBody:
+        description: идентификатор типа Guid и параметр определяющий тип удаления (по умолчанию true)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRoomCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRoomCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRoomCommand'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /User/Get:
+    get:
+      tags:
+        - User
+      summary: метод предназначен для получения отдельного элемента данных
+      parameters:
+        - name: Id
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserViewModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /User/LogIn:
+    post:
+      tags:
+        - User
+      summary: Авторизация
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/LoginUserCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LoginUserCommandResponce'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginUserCommandResponce'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LoginUserCommandResponce'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /User/Register:
+    post:
+      tags:
+        - User
+      summary: Регистрация
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserCommand'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserCommand'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserCommand'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RegisterUserCommandResponce'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterUserCommandResponce'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RegisterUserCommandResponce'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /User/LogOut:
+    post:
+      tags:
+        - User
+      summary: Выход
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /User/ChangePassword:
+    post:
+      tags:
+        - User
+      summary: Редактирование пароля
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserPasswordCommandRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserPasswordCommandRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserPasswordCommandRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /User/ChangeName:
+    post:
+      tags:
+        - User
+      summary: Редактирование имени
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserNameCommandRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserNameCommandRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserNameCommandRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+  /User/DeleteMyAccount:
+    post:
+      tags:
+        - User
+      summary: Удалить мой аккаунт
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Server Error
+components:
+  schemas:
+    CreateMessageCommand:
+      type: object
+      properties:
+        roomId:
+          type: string
+          format: uuid
+        text:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreateRoomCommand:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    DeleteMessageCommand:
+      type: object
+      properties:
+        soft:
+          type: boolean
+        messageId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    DeleteRoomCommand:
+      type: object
+      properties:
+        soft:
+          type: boolean
+        roomId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    LoginUserCommand:
+      type: object
+      properties:
+        login:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false
+    LoginUserCommandResponce:
+      type: object
+      properties:
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    MessageListViewModel:
+      type: object
+      properties:
+        modelList:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageViewModel'
+          nullable: true
+        totalCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+    MessageViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/UserViewModel'
+        text:
+          type: string
+          nullable: true
+        isRead:
+          type: boolean
+        isEdited:
+          type: boolean
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: { }
+    RegisterUserCommand:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        login:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false
+    RegisterUserCommandResponce:
+      type: object
+      properties:
+        token:
+          type: string
+          nullable: true
+      additionalProperties: false
+    RoomListViewModel:
+      type: object
+      properties:
+        modelList:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoomViewModel'
+          nullable: true
+        totalCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+    RoomViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserViewModel'
+          nullable: true
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateMessageCommand:
+      type: object
+      properties:
+        messageId:
+          type: string
+          format: uuid
+        text:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateRoomCommand:
+      type: object
+      properties:
+        roomId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateUserNameCommandRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateUserPasswordCommandRequest:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+          nullable: true
+        login:
+          type: string
+          nullable: true
+        bio:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: { }
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: 'JWT Authorization header using the Bearer scheme. Example: "Authorization: Bearer {token}"'
+      name: Authorization
+      in: header
+security:
+  - Bearer: [ ]
