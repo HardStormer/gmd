@@ -11,6 +11,7 @@ const Routing = () => {
             <Route path="/chat" element={<ChatPage/>}/>
             <Route path="/login" element={<LogIn/>}/>
             <Route path="/test" element={<TestPage/>}/>
+            <Route path="/*" element={<HomePage/>}/>
         </Routes>
     );
 }

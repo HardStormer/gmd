@@ -1,57 +1,57 @@
 import {
     CreateRoomData,
-    CreateRoomResponce, DeleteRoomData, DeleteRoomResponce, EditRoomData, EditRoomResponce,
-    GetRoomByIdParams, GetRoomByIdResponce,
-    GetRoomListByNameParams, GetRoomListByNameResponce,
+    CreateRoomResponse, DeleteRoomData, DeleteRoomResponse, EditRoomData, EditRoomResponse,
+    GetRoomByIdParams, GetRoomByIdResponse,
+    GetRoomListByNameParams, GetRoomListByNameResponse,
     Room, Rooms,
 } from "../../model";
 import {httpClient, method} from "../../../shared";
 
 export async function getRoomById(params: GetRoomByIdParams) : Promise<Room>{
-    let responce = httpClient<GetRoomByIdResponce>(
+    let response = httpClient<GetRoomByIdResponse>(
         method.get,
         "/Room/Get",
         params)
 
-    return responce;
+    return response;
 }
 
 export async function getRoomListByName(params: GetRoomListByNameParams) : Promise<Rooms>{
-    let responce = httpClient<GetRoomListByNameResponce>(
+    let response = httpClient<GetRoomListByNameResponse>(
         method.get,
         "/Room/GetAllPagedByName",
         params)
 
-    return responce;
+    return response;
 }
 
-export async function createRoomByName(data: CreateRoomData) : Promise<CreateRoomResponce>{
-    let responce = httpClient<CreateRoomResponce>(
+export async function createRoomByName(data: CreateRoomData) : Promise<CreateRoomResponse>{
+    let response = httpClient<CreateRoomResponse>(
         method.post,
         "/Room/Create",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
-export async function editRoomByName(data: EditRoomData) : Promise<EditRoomResponce>{
-    let responce = httpClient<EditRoomResponce>(
+export async function editRoomByName(data: EditRoomData) : Promise<EditRoomResponse>{
+    let response = httpClient<EditRoomResponse>(
         method.put,
         "/Room/Edit",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
 
-export async function deleteRoomByName(data: DeleteRoomData) : Promise<DeleteRoomResponce>{
-    let responce = httpClient<DeleteRoomResponce>(
+export async function deleteRoomByName(data: DeleteRoomData) : Promise<DeleteRoomResponse>{
+    let response = httpClient<DeleteRoomResponse>(
         method.delete,
         "/Room/Delete",
         {},
         data)
 
-    return responce;
+    return response;
 }

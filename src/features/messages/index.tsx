@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {getMessageListByText, GetMessageListByTextParams, Message, Messages, MessagesCard} from "../../entities";
 import LoadSpinner from "../../shared/ui/spinner";
 
-const MessagesWidget = (request : GetMessageListByTextParams) => {
+const MessagesFeature = (request : GetMessageListByTextParams) => {
     const [roomsData, setMessagesData] = useState<Messages | null>(null);
 
     let text = ""
@@ -49,4 +49,4 @@ const MessagesWidget = (request : GetMessageListByTextParams) => {
     );
 }
 
-export default MessagesWidget
+export default MessagesFeature

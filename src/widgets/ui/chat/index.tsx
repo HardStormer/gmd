@@ -1,6 +1,6 @@
 import {SearchFormChat} from "../../../shared";
 import {useEffect, useState} from "react";
-import MessagesWidget from "../../../features/messages";
+import MessagesFeature from "../../../features/messages";
 import RoomsFeature from "../../../features/rooms";
 
 const ChatWidget = () => {
@@ -40,7 +40,7 @@ const ChatWidget = () => {
                                     <div className="col-md-6 col-lg-7 col-xl-8">
                                         <div className="pt-3 pe-3" data-mdb-perfect-scrollbar="true">
 
-                                            <MessagesWidget/>
+                                            <MessagesFeature/>
 
                                         </div>
                                         <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">

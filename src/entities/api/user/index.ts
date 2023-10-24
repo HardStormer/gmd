@@ -1,78 +1,78 @@
 import {
-    ChangeNameData, ChangeNameResponce,
-    ChangePasswordData, ChangePasswordResponce, DeleteMyAccountData, DeleteMyAccountResponce,
+    ChangeNameData, ChangeNameResponse,
+    ChangePasswordData, ChangePasswordResponse, DeleteMyAccountResponse,
     GetUserByIdParams,
-    GetUserByIdResponce,
+    GetUserByIdResponse,
     LogInData,
-    LogInResponce,
-    RegisterData, RegisterResponce,
+    LogInResponse,
+    RegisterData, RegisterResponse,
     User
 } from "../../model";
 import {httpClient, method} from "../../../shared";
 
 export async function getUserById(params: GetUserByIdParams) : Promise<User>{
-    let responce = httpClient<GetUserByIdResponce>(
+    let response = httpClient<GetUserByIdResponse>(
         method.get,
         "/User/Get",
         params)
 
-    return responce;
+    return response;
 }
 
-export async function logIn(data: LogInData) : Promise<LogInResponce>{
-    let responce = httpClient<LogInResponce>(
+export async function logIn(data: LogInData) : Promise<LogInResponse>{
+    let response = httpClient<LogInResponse>(
         method.post,
         "/User/LogIn",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
-export async function register(data: RegisterData) : Promise<RegisterResponce>{
-    let responce = httpClient<RegisterResponce>(
+export async function register(data: RegisterData) : Promise<RegisterResponse>{
+    let response = httpClient<RegisterResponse>(
         method.post,
         "/User/Register",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
 export async function logOut() {
-    let responce = httpClient(
+    let response = httpClient(
         method.post,
         "/User/LogOut")
 
-    return responce;
+    return response;
 }
 
-export async function changePassword(data: ChangePasswordData) : Promise<ChangePasswordResponce>{
-    let responce = httpClient<ChangePasswordResponce>(
+export async function changePassword(data: ChangePasswordData) : Promise<ChangePasswordResponse>{
+    let response = httpClient<ChangePasswordResponse>(
         method.post,
         "/User/ChangePassword",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
-export async function changeName(data: ChangeNameData) : Promise<ChangeNameResponce>{
-    let responce = httpClient<ChangeNameResponce>(
+export async function changeName(data: ChangeNameData) : Promise<ChangeNameResponse>{
+    let response = httpClient<ChangeNameResponse>(
         method.post,
         "/User/ChangeName",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
-export async function deleteMyAccount(data: DeleteMyAccountData) : Promise<DeleteMyAccountResponce>{
-    let responce = httpClient<DeleteMyAccountResponce>(
+export async function deleteMyAccount() : Promise<DeleteMyAccountResponse>{
+    let response = httpClient<DeleteMyAccountResponse>(
         method.post,
         "/User/DeleteMyAccount",
         {},
-        data)
+        {})
 
-    return responce;
+    return response;
 }

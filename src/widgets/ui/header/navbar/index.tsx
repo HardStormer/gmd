@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import LogOutFeature from "../../../../features/logOut";
 
 
 const Navbar = () => {
@@ -36,6 +37,7 @@ const Navbar = () => {
                             <Link to={"/chat"} className={"nav-link"}>Чат</Link>
                         </li>
                     </ul>
+                    <LogOutFeature/>
                     <button onClick={changeTheme} className="btn btn-dark shadow" id="btnSwitch">Сменить тему</button>
                 </div>
             </div>

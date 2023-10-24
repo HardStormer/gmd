@@ -1,57 +1,57 @@
 import {
     CreateMessageData,
-    CreateMessageResponce, DeleteMessageData, DeleteMessageResponce, EditMessageData, EditMessageResponce,
-    GetMessageByIdParams, GetMessageByIdResponce,
-    GetMessageListByTextParams, GetMessageListByTextResponce,
+    CreateMessageResponse, DeleteMessageData, DeleteMessageResponse, EditMessageData, EditMessageResponse,
+    GetMessageByIdParams, GetMessageByIdResponse,
+    GetMessageListByTextParams, GetMessageListByTextResponse,
     Message, Messages,
 } from "../../model";
 import {httpClient, method} from "../../../shared";
 
 export async function getMessageById(params: GetMessageByIdParams) : Promise<Message>{
-    let responce = httpClient<GetMessageByIdResponce>(
+    let response = httpClient<GetMessageByIdResponse>(
         method.get,
         "/Message/Get",
         params)
 
-    return responce;
+    return response;
 }
 
 export async function getMessageListByText(params: GetMessageListByTextParams) : Promise<Messages>{
-    let responce = httpClient<GetMessageListByTextResponce>(
+    let response = httpClient<GetMessageListByTextResponse>(
         method.get,
         "/Message/GetAllPagedByText",
         params)
 
-    return responce;
+    return response;
 }
 
-export async function createMessageByName(data: CreateMessageData) : Promise<CreateMessageResponce>{
-    let responce = httpClient<CreateMessageResponce>(
+export async function createMessageByName(data: CreateMessageData) : Promise<CreateMessageResponse>{
+    let response = httpClient<CreateMessageResponse>(
         method.post,
         "/Message/Create",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
-export async function editMessageByName(data: EditMessageData) : Promise<EditMessageResponce>{
-    let responce = httpClient<EditMessageResponce>(
+export async function editMessageByName(data: EditMessageData) : Promise<EditMessageResponse>{
+    let response = httpClient<EditMessageResponse>(
         method.put,
         "/Message/Edit",
         {},
         data)
 
-    return responce;
+    return response;
 }
 
 
-export async function deleteMessageByName(data: DeleteMessageData) : Promise<DeleteMessageResponce>{
-    let responce = httpClient<DeleteMessageResponce>(
+export async function deleteMessageByName(data: DeleteMessageData) : Promise<DeleteMessageResponse>{
+    let response = httpClient<DeleteMessageResponse>(
         method.delete,
         "/Message/Delete",
         {},
         data)
 
-    return responce;
+    return response;
 }
