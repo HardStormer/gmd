@@ -8,6 +8,9 @@ export type GetMessageByIdResponse = Message
 export type GetMessageListByTextParams = paths["/Message/GetAllPagedByText"]["get"]["parameters"]["query"]
 export type GetMessageListByTextResponse = Messages
 
+export type GetMessageListByRoomIdParams = paths["/Message/GetAllPagedByRoomId"]["get"]["parameters"]["query"]
+export type GetMessageListByRoomIdResponse = Messages
+
 export type CreateMessageData = components["schemas"]["CreateMessageCommand"]
 export type CreateMessageResponse = paths["/Message/Create"]["post"]["responses"]["200"]["content"]["application/json"]
 

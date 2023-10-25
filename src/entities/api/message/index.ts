@@ -1,7 +1,7 @@
 import {
     CreateMessageData,
     CreateMessageResponse, DeleteMessageData, DeleteMessageResponse, EditMessageData, EditMessageResponse,
-    GetMessageByIdParams, GetMessageByIdResponse,
+    GetMessageByIdParams, GetMessageByIdResponse, GetMessageListByRoomIdParams, GetMessageListByRoomIdResponse,
     GetMessageListByTextParams, GetMessageListByTextResponse,
     Message, Messages,
 } from "../../model";
@@ -20,6 +20,15 @@ export async function getMessageListByText(params: GetMessageListByTextParams) :
     let response = httpClient<GetMessageListByTextResponse>(
         method.get,
         "/Message/GetAllPagedByText",
+        params)
+
+    return response;
+}
+
+export async function getMessageListByRoomId(params: GetMessageListByRoomIdParams) : Promise<Messages>{
+    let response = httpClient<GetMessageListByRoomIdResponse>(
+        method.get,
+        "/Message/GetAllPagedByRoomId",
         params)
 
     return response;

@@ -1,13 +1,19 @@
 import {useEffect, useState} from "react";
-import {getMessageListByText, GetMessageListByTextParams, Message, Messages, MessagesCard} from "../../entities";
+import {
+    getMessageListByRoomId,
+    getMessageListByText,
+    GetMessageListByTextParams,
+    Message,
+    Messages,
+    MessagesCard
+} from "../../entities";
 import LoadSpinner from "../../shared/ui/spinner";
-import {useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 
 const MessagesFeature = (request : GetMessageListByTextParams) => {
     const [roomsData, setMessagesData] = useState<Messages | null>(null);
 
-    const [roomId, setSearchParams] = useSearchParams();
-    roomId.get("roomId")
+    const location = useLocation();
 
     let text = ""
 
@@ -17,17 +23,24 @@ const MessagesFeature = (request : GetMessageListByTextParams) => {
         }
     }
     useEffect(() => {
+        let roomId = new URLSearchParams(location.search).get("roomId");
+
         async function fetchData() {
             try {
-                const rooms = await getMessageListByText({Text: text });
-                setMessagesData(rooms);
+                if (roomId !== null){
+                    const messages = await getMessageListByRoomId({RoomId: roomId });
+                    setMessagesData(messages);
+                }
+                else {
+                    setMessagesData(null)
+                }
             } catch (error) {
                 console.error('Error fetching rooms data:', error);
             }
         }
 
         fetchData();
-    }, []);
+    }, [location]);
 
     let i = 0
 
