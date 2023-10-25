@@ -56,7 +56,7 @@ const MessagesFeature = (request : GetMessageListByTextParams) => {
                             i++;
                         }
                         return(
-                            <MessagesCard text={message.text} key={i}/>
+                            <MessagesCard text={message.text} isRead={message.isRead} id={message.id} createdAt={message.createdAt} isEdited={message.isEdited} user={message.user} key={i}/>
                         )
                     })
                 )
