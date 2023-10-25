@@ -11,7 +11,7 @@ import LoadSpinner from "../../shared/ui/spinner";
 import {useLocation, useSearchParams} from "react-router-dom";
 
 const MessagesFeature = (request : GetMessageListByTextParams) => {
-    const [roomsData, setMessagesData] = useState<Messages | null>(null);
+    const [messagesData, setMessagesData] = useState<Messages | null>(null);
 
     const location = useLocation();
 
@@ -46,12 +46,12 @@ const MessagesFeature = (request : GetMessageListByTextParams) => {
 
     return (
         <>
-            {!roomsData ? (<LoadSpinner/> ) : (
-                !roomsData.modelList ? (
+            {!messagesData ? (<LoadSpinner/> ) : (
+                !messagesData.modelList ? (
                     <div className="alert alert-warning" role="alert">
                         Не найдено
                     </div>) : (
-                    roomsData.modelList.map( function (message : Message){
+                    messagesData.modelList.map( function (message : Message){
                         {
                             i++;
                         }

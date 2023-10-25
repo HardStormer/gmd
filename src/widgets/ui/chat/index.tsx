@@ -2,9 +2,10 @@ import {SearchFormChat} from "../../../shared";
 import {useEffect, useState} from "react";
 import MessagesFeature from "../../../features/messages";
 import RoomsFeature from "../../../features/rooms";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Button from "../../../shared/ui/button";
 import RoomsMyFeature from "../../../features/roomsMy";
+import {getMessageListByRoomId, getRoomById, Messages, Room} from "../../../entities";
 
 const ChatWidget = () => {
 
@@ -16,6 +17,31 @@ const ChatWidget = () => {
     }
     useEffect(() => {
     }, [searchInput, setSearchInput]);
+
+
+    const [currentRoomData, setCurrentRoomData] = useState<Room | null>(null);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        let roomId = new URLSearchParams(location.search).get("roomId");
+
+        async function fetchData() {
+            try {
+                if (roomId !== null){
+                    const room = await getRoomById({Id: roomId });
+                    setCurrentRoomData(room);
+                }
+                else {
+                    setCurrentRoomData(null)
+                }
+            } catch (error) {
+                console.error('Error fetching rooms data:', error);
+            }
+        }
+
+        fetchData();
+    }, [location]);
 
     return (
         <section >
@@ -42,10 +68,10 @@ const ChatWidget = () => {
                                         </div>
                                     </div>
                                     <div className="col-md-6 col-lg-7 col-xl-8">
+                                        Комната: {currentRoomData?.name}
+
                                         <div className="pt-3 pe-3" data-mdb-perfect-scrollbar="true">
-
                                             <MessagesFeature/>
-
                                         </div>
                                         <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
                                                 <input type="text" className="form-control form-control-lg" id="exampleFormControlInput2"
