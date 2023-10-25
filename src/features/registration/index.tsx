@@ -62,7 +62,7 @@ const AuthFeature = (request : RegisterData) => {
                 <div className="form-body">
                     <div className="login">
                         <label className="form-label" htmlFor="login">Логин </label>
-                        <input  type="login" id="login" className="form-control" value={login} onChange = {(e) => handleInputChange(e)} placeholder="Почта"/>
+                        <input  type="login" id="login" className="form-control" value={login} onChange = {(e) => handleInputChange(e)} placeholder="Логин"/>
                     </div>
                     <div className="name">
                         <label className="form-label" htmlFor="login">Имя </label>
