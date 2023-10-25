@@ -2,9 +2,17 @@ import {Link} from "react-router-dom";
 import {Room} from "../../model";
 
 export const RoomCard = (room : Room) => {
+    let roomHref = "#/chat?roomId="
+    if (room.id !== null && room.id !== undefined){
+        roomHref = roomHref + room.id.toString()
+    }
+    else {
+        roomHref = "#/chat"
+    }
+
     return(
         <li className="p-2 border-bottom">
-            <a href="#!" className="d-flex justify-content-between">
+            <a href={roomHref} className="d-flex justify-content-between">
                 <div className="d-flex flex-row">
                     <div>
                         <span className="badge bg-success badge-dot"></span>

@@ -34,7 +34,7 @@ const RoomsFeature = (request : GetRoomListByNameParams) => {
                     </div>) : (
                     roomsData.modelList.map( function (room : Room){
                         return(
-                            <RoomCard name={room.name}/>
+                            <RoomCard name={room.name} id={room.id}/>
                         )
                     })
                 )
