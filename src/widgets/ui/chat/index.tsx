@@ -6,6 +6,7 @@ import {Link, useLocation} from "react-router-dom";
 import Button from "../../../shared/ui/button";
 import RoomsMyFeature from "../../../features/roomsMy";
 import {getMessageListByRoomId, getRoomById, Messages, Room} from "../../../entities";
+import AddMessage from "../../../features/addMessage";
 
 const ChatWidget = () => {
 
@@ -73,13 +74,7 @@ const ChatWidget = () => {
                                         <div className="pt-3 pe-3" data-mdb-perfect-scrollbar="true">
                                             <MessagesFeature/>
                                         </div>
-                                        <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
-                                                <input type="text" className="form-control form-control-lg" id="exampleFormControlInput2"
-                                                       placeholder="Type message"/>
-                                                    <a className="ms-1 text-muted" href="#!"><i className="fas fa-paperclip"></i></a>
-                                                    <a className="ms-3 text-muted" href="#!"><i className="fas fa-smile"></i></a>
-                                                    <a className="ms-3" href="#!"><i className="fas fa-paper-plane"></i></a>
-                                        </div>
+                                        <AddMessage/>
                                     </div>
                                 </div>
                             </div>
