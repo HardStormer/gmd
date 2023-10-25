@@ -1087,6 +1087,7 @@ export interface components {
       text?: string | null;
       isRead?: boolean;
       isEdited?: boolean;
+      isMy?: boolean;
     };
     ProblemDetails: {
       type?: string | null;
