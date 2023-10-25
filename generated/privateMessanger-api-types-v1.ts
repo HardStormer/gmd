@@ -378,6 +378,101 @@ export interface paths {
       };
     };
   };
+  "/Room/GetAllPagedMy": {
+    /** метод предназначен для получения пагинированного списка элементов */
+    get: {
+      parameters: {
+        query?: {
+          Limit?: number;
+          Offset?: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["RoomListViewModel"];
+            "application/json": components["schemas"]["RoomListViewModel"];
+            "text/json": components["schemas"]["RoomListViewModel"];
+          };
+        };
+        /** @description Bad Request */
+        400: {
+          content: {
+            "text/plain": components["schemas"]["ValidationProblemDetails"];
+            "application/json": components["schemas"]["ValidationProblemDetails"];
+            "text/json": components["schemas"]["ValidationProblemDetails"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: {
+            "text/plain": components["schemas"]["ProblemDetails"];
+            "application/json": components["schemas"]["ProblemDetails"];
+            "text/json": components["schemas"]["ProblemDetails"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ProblemDetails"];
+            "application/json": components["schemas"]["ProblemDetails"];
+            "text/json": components["schemas"]["ProblemDetails"];
+          };
+        };
+        /** @description Server Error */
+        500: never;
+      };
+    };
+  };
+  "/Room/GetAllPagedByUserId": {
+    /** метод предназначен для получения пагинированного списка элементов */
+    get: {
+      parameters: {
+        query?: {
+          UserId?: string;
+          Limit?: number;
+          Offset?: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["RoomListViewModel"];
+            "application/json": components["schemas"]["RoomListViewModel"];
+            "text/json": components["schemas"]["RoomListViewModel"];
+          };
+        };
+        /** @description Bad Request */
+        400: {
+          content: {
+            "text/plain": components["schemas"]["ValidationProblemDetails"];
+            "application/json": components["schemas"]["ValidationProblemDetails"];
+            "text/json": components["schemas"]["ValidationProblemDetails"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: {
+            "text/plain": components["schemas"]["ProblemDetails"];
+            "application/json": components["schemas"]["ProblemDetails"];
+            "text/json": components["schemas"]["ProblemDetails"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ProblemDetails"];
+            "application/json": components["schemas"]["ProblemDetails"];
+            "text/json": components["schemas"]["ProblemDetails"];
+          };
+        };
+        /** @description Server Error */
+        500: never;
+      };
+    };
+  };
   "/Room/GetAllPaged": {
     /** метод предназначен для получения пагинированного списка элементов */
     get: {
@@ -612,6 +707,51 @@ export interface paths {
       parameters: {
         query?: {
           Id?: string;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["UserViewModel"];
+            "application/json": components["schemas"]["UserViewModel"];
+            "text/json": components["schemas"]["UserViewModel"];
+          };
+        };
+        /** @description Bad Request */
+        400: {
+          content: {
+            "text/plain": components["schemas"]["ValidationProblemDetails"];
+            "application/json": components["schemas"]["ValidationProblemDetails"];
+            "text/json": components["schemas"]["ValidationProblemDetails"];
+          };
+        };
+        /** @description Unauthorized */
+        401: {
+          content: {
+            "text/plain": components["schemas"]["ProblemDetails"];
+            "application/json": components["schemas"]["ProblemDetails"];
+            "text/json": components["schemas"]["ProblemDetails"];
+          };
+        };
+        /** @description Not Found */
+        404: {
+          content: {
+            "text/plain": components["schemas"]["ProblemDetails"];
+            "application/json": components["schemas"]["ProblemDetails"];
+            "text/json": components["schemas"]["ProblemDetails"];
+          };
+        };
+        /** @description Server Error */
+        500: never;
+      };
+    };
+  };
+  "/User/GetMy": {
+    /** метод предназначен для получения отдельного элемента данных */
+    get: {
+      parameters: {
+        query?: {
         };
       };
       responses: {

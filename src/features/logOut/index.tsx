@@ -1,10 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     LogInData, logOut
 } from "../../entities";
 import {Link} from "react-router-dom";
 
 const LogOutFeature = () => {
+    const [token, setToken] = useState(localStorage.getItem('access_token'));
+
+    useEffect(() => {
+        setToken(localStorage.getItem('access_token'));
+    }, []);
 
     async function fetchData() {
         try {
@@ -13,10 +18,10 @@ const LogOutFeature = () => {
             console.error('Error logout:', error);
         } finally {
             localStorage.removeItem('access_token')
+            setToken(null)
+            window.location.reload();
         }
     }
-
-    let token = localStorage.getItem('access_token')
 
     if (token == null) {
         return (<Link to={"/login"} className="btn">Авторизация</Link>)

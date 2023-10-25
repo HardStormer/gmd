@@ -4,6 +4,7 @@ import MessagesFeature from "../../../features/messages";
 import RoomsFeature from "../../../features/rooms";
 import {Link} from "react-router-dom";
 import Button from "../../../shared/ui/button";
+import RoomsMyFeature from "../../../features/roomsMy";
 
 const ChatWidget = () => {
 
@@ -28,6 +29,8 @@ const ChatWidget = () => {
                                 <div className="row">
                                     <div className="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
                                         <div className="p-3">
+                                            Мои комнаты:
+                                            <RoomsMyFeature key={Math.floor(Math.random() * 200)} />
                                             <SearchFormChat value={searchInput} onChange={handleChange}/>
                                             <div data-mdb-perfect-scrollbar="true" >
                                                 {/*style="position: relative; height: 400px"*/}

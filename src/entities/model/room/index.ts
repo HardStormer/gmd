@@ -8,6 +8,12 @@ export type GetRoomByIdResponse = Room
 export type GetRoomListByNameParams = paths["/Room/GetAllPagedByName"]["get"]["parameters"]["query"]
 export type GetRoomListByNameResponse = Rooms
 
+export type GetRoomListByUserIdParams = paths["/Room/GetAllPagedByUserId"]["get"]["parameters"]["query"]
+export type GetRoomListByUserIdResponse = Rooms
+
+export type GetRoomListMyParams = paths["/Room/GetAllPagedMy"]["get"]["parameters"]["query"]
+export type GetRoomListMyResponse = Rooms
+
 export type CreateRoomData = components["schemas"]["CreateRoomCommand"]
 export type CreateRoomResponse = paths["/Room/Create"]["post"]["responses"]["200"]["content"]["application/json"]
 

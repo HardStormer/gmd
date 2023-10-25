@@ -1,9 +1,19 @@
 import {
     CreateRoomData,
-    CreateRoomResponse, DeleteRoomData, DeleteRoomResponse, EditRoomData, EditRoomResponse,
-    GetRoomByIdParams, GetRoomByIdResponse,
-    GetRoomListByNameParams, GetRoomListByNameResponse,
-    Room, Rooms,
+    CreateRoomResponse,
+    DeleteRoomData,
+    DeleteRoomResponse,
+    EditRoomData,
+    EditRoomResponse,
+    GetRoomByIdParams,
+    GetRoomByIdResponse,
+    GetRoomListByNameParams,
+    GetRoomListByNameResponse,
+    GetRoomListByUserIdParams,
+    GetRoomListByUserIdResponse,
+    GetRoomListMyParams, GetRoomListMyResponse,
+    Room,
+    Rooms,
 } from "../../model";
 import {httpClient, method} from "../../../shared";
 
@@ -20,6 +30,24 @@ export async function getRoomListByName(params: GetRoomListByNameParams) : Promi
     let response = httpClient<GetRoomListByNameResponse>(
         method.get,
         "/Room/GetAllPagedByName",
+        params)
+
+    return response;
+}
+
+export async function getRoomListByUserId(params: GetRoomListByUserIdParams) : Promise<Rooms>{
+    let response = httpClient<GetRoomListByUserIdResponse>(
+        method.get,
+        "/Room/GetAllPagedByUserId",
+        params)
+
+    return response;
+}
+
+export async function getRoomListMy(params: GetRoomListMyParams) : Promise<Rooms>{
+    let response = httpClient<GetRoomListMyResponse>(
+        method.get,
+        "/Room/GetAllPagedMy",
         params)
 
     return response;
