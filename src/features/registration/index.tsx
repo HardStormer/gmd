@@ -61,20 +61,20 @@ const AuthFeature = (request : RegisterData) => {
             <div className="form">
                 <div className="form-body">
                     <div className="login">
-                        <label className="form__label" htmlFor="login">Логин </label>
-                        <input  type="login" id="login" className="form__input" value={login} onChange = {(e) => handleInputChange(e)} placeholder="Email"/>
+                        <label className="form-label" htmlFor="login">Логин </label>
+                        <input  type="login" id="login" className="form-control" value={login} onChange = {(e) => handleInputChange(e)} placeholder="Почта"/>
                     </div>
                     <div className="name">
-                        <label className="form__label" htmlFor="login">Имя </label>
-                        <input  type="login" id="name" className="form__input" value={name} onChange = {(e) => handleInputChange(e)} placeholder="Email"/>
+                        <label className="form-label" htmlFor="login">Имя </label>
+                        <input  type="login" id="name" className="form-control" value={name} onChange = {(e) => handleInputChange(e)} placeholder="Имя"/>
                     </div>
                     <div className="password">
-                        <label className="form__label" htmlFor="password">Пароль </label>
-                        <input className="form__input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
+                        <label className="form-label" htmlFor="password">Пароль </label>
+                        <input className="form-control" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Пароль"/>
                     </div>
                 </div>
                 <div className="footer">
-                    <button onClick={fetchData} type="submit" className="btn">Register</button>
+                    <button onClick={fetchData} type="submit" className="btn">Зарегестрироваться</button>
                 </div>
             </div>
         </>

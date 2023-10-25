@@ -2,12 +2,12 @@ import {SearchFormChat} from "../../../shared";
 import {useEffect, useState} from "react";
 import MessagesFeature from "../../../features/messages";
 import RoomsFeature from "../../../features/rooms";
+import {Link} from "react-router-dom";
+import Button from "../../../shared/ui/button";
 
 const ChatWidget = () => {
 
     const [searchInput, setSearchInput] = useState("");
-
-    let roomName = "";
 
     const handleChange = (e : any) => {
         console.log(e.target.value)
@@ -35,6 +35,7 @@ const ChatWidget = () => {
                                                     <RoomsFeature Name={searchInput} key={Math.floor(Math.random() * 200)} />
                                                 </ul>
                                             </div>
+                                            <Link to={"/roomCreate"} className={"btn btn-primary"}>Создать комнату</Link>
                                         </div>
                                     </div>
                                     <div className="col-md-6 col-lg-7 col-xl-8">

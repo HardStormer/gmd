@@ -47,17 +47,22 @@ export async function httpClient<TResponce>(
                     return  response.data
                 })
                 .catch(function (error) {
+                        if (error.response.data.status === 400)
+                        {
+                            console.error(error.response.data);
+                            return error.response.data
+                        }
                         if (error.response) {
                             console.error(error.response.data);
-                            console.error(error.response.status);
-                            console.error(error.response.headers);
+                            // console.error(error.response.status);
+                            // console.error(error.response.headers);
                         } else if (error.request) {
                             console.log(error.request);
                         } else {
                             // Произошло что-то при настройке запроса, вызвавшее ошибку
                             console.log('Error', error.message);
                         }
-                        console.log(error.config);
+                        // console.log(error.config);
                     }
                 ));
         case 'put':

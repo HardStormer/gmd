@@ -1,9 +1,13 @@
 import {useEffect, useState} from "react";
 import {getMessageListByText, GetMessageListByTextParams, Message, Messages, MessagesCard} from "../../entities";
 import LoadSpinner from "../../shared/ui/spinner";
+import {useSearchParams} from "react-router-dom";
 
 const MessagesFeature = (request : GetMessageListByTextParams) => {
     const [roomsData, setMessagesData] = useState<Messages | null>(null);
+
+    const [roomId, setSearchParams] = useSearchParams();
+    roomId.get("roomId")
 
     let text = ""
 
