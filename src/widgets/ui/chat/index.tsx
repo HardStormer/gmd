@@ -97,7 +97,8 @@ const ChatWidget = () => {
                                                 (
                                                     <>
                                                         Комната: {currentRoomData?.name}
-                                                        <div id={"messagesScroll"} className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{maxHeight: "300px", overflowY: "scroll"}}>
+                                                        <div id={"messagesScroll"} className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{
+                                                            display: "flex",flexDirection: "column-reverse", maxHeight: "300px", overflowY: "scroll"}}>
                                                             <MessagesFeature params={combinedParams} />
                                                         </div>
                                                         <AddMessage/>
