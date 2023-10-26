@@ -22,8 +22,10 @@ export const RoomCard = (room : Room) => {
 
     async function deleteRoom() {
         try {
-            if (room.id !== null){
+            if (room.id !== null && room.id !== undefined){
                 await deleteRoomById({roomId: room.id });
+
+                window.location.reload()
             }
         } catch (error) {
             handleShow()
@@ -32,8 +34,8 @@ export const RoomCard = (room : Room) => {
     }
 
     return(
-        <div className="p-2 border-bottom">
-            <a href={roomHref} id={room.id} className="d-flex justify-content-between">
+        <div id={room.id} className="p-2 border-bottom">
+            <a href={roomHref} className="d-flex justify-content-between">
                 <div className="d-flex flex-row">
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>

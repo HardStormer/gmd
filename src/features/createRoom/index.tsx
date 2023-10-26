@@ -29,7 +29,8 @@ const CreateRoomFeature = (request : CreateRoomData) => {
             const response = await createRoomByName(
                 createRoomRequest
             );
-            navigate(-1);
+            let id = response.id
+            window.location.replace(`#/chat?roomId=${id}`)
         } catch (error) {
             console.error('Error create:', error);
         }

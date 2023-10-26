@@ -47,7 +47,7 @@ const AuthFeature = (request : LogInData) => {
             if(response.token != null)
             {
                 localStorage.setItem('access_token', response.token);
-                navigate(-1);
+                window.location.replace(`#`)
             }
         } catch (error) {
             try {
