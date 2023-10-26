@@ -22,8 +22,12 @@ export const MessagesCard = ( message : Message ) => {
 
     async function deleteMessage() {
         try {
-            if (message.id !== null){
+            if (message.id !== null && message.id !== undefined){
                 await deleteMessageById({messageId: message.id });
+                let thisMessage = document.getElementById(message.id.toString())
+                if (thisMessage != null){
+                    thisMessage.remove()
+                }
             }
         } catch (error) {
             console.error('Error deleting:', error);
