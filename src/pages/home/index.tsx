@@ -23,11 +23,7 @@ function HomePage() {
         <>
             <Header/>
             <div className={"container"}>
-                {!userData ? (<LoadSpinner/>) : (
-                    <div className="alert alert-info" role="alert">
-                        {userData.login}
-                    </div>
-                )}
+                Добро пожаловать
             </div>
             <Footer/>
         </>

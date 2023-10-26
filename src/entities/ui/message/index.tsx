@@ -39,10 +39,10 @@ export const MessagesCard = ( message : Message ) => {
             return (
                 <div id={message.id} className="d-flex flex-row justify-content-end">
                     <div>
-                        <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                        <div className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
                             <p className="small me-3 mb-3 rounded-3">{message.user?.name}</p>
                             {message.text}
-                        </p>
+                        </div>
                         <p className="small me-3 mb-3 rounded-3 text-muted">{messageDate}</p>
                     </div>
                     <button type="button" className="btn-close" aria-label="Удалить" onClick={deleteMessage}></button>
@@ -52,10 +52,10 @@ export const MessagesCard = ( message : Message ) => {
             return (
                 <div id={message.id} className="d-flex flex-row justify-content-start">
                     <div>
-                        <p className="small p-2 ms-3 mb-1 text-white rounded-3 bg-secondary">
+                        <div className="small p-2 ms-3 mb-1 text-white rounded-3 bg-secondary">
                             <p className="small me-3 mb-3 rounded-3">{message.user?.name}</p>
                             {message.text}
-                        </p>
+                        </div>
                         {/*style="background-color: #f5f6f7;"*/}
                         <p className="small ms-3 mb-3 rounded-3 text-muted float-end">{messageDate}</p>
                     </div>

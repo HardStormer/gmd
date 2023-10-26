@@ -3,11 +3,9 @@ import React, {useEffect, useState} from "react";
 import MessagesFeature from "../../../features/messages";
 import RoomsFeature from "../../../features/rooms";
 import {Link, useLocation} from "react-router-dom";
-import Button from "../../../shared/ui/button";
 import RoomsMyFeature from "../../../features/roomsMy";
-import {getMessageListByRoomId, getRoomById, Messages, Room} from "../../../entities";
+import {getRoomById, Room} from "../../../entities";
 import AddMessage from "../../../features/addMessage";
-import {Scrollbar} from "react-scrollbars-custom";
 
 const ChatWidget = () => {
 
@@ -19,7 +17,6 @@ const ChatWidget = () => {
     }
     useEffect(() => {
     }, [searchInput, setSearchInput]);
-
 
     const [currentRoomData, setCurrentRoomData] = useState<Room | null>(null);
 
@@ -43,8 +40,17 @@ const ChatWidget = () => {
         }
 
         fetchData();
+
+        return () => {
+            setCurrentRoomData(null)
+        };
     }, [location]);
 
+    const combinedParams = {
+        request: {
+        },
+        searchInput: searchInput,
+    };
     return (
         <section >
             {/*style="background-color: #CDC4F9;"*/}
@@ -73,12 +79,32 @@ const ChatWidget = () => {
                                         </div>
                                     </div>
                                     <div className="col-md-6 col-lg-7 col-xl-8">
-                                        Комната: {currentRoomData?.name}
-
-                                        <div id={"messagesScroll"} className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{maxHeight: "300px", overflowY: "scroll"}}>
-                                            <MessagesFeature/>
-                                        </div>
-                                        <AddMessage/>
+                                        {!currentRoomData?.name ?
+                                            (
+                                                <div className="alert alert-info" role="alert">
+                                                    Выберите комнату
+                                                </div>
+                                            )
+                                            :
+                                            (
+                                            !currentRoomData?.name ?
+                                                (
+                                                    <div className="alert alert-warning" role="alert">
+                                                        Не найдено
+                                                    </div>
+                                                )
+                                                :
+                                                (
+                                                    <>
+                                                        Комната: {currentRoomData?.name}
+                                                        <div id={"messagesScroll"} className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{maxHeight: "300px", overflowY: "scroll"}}>
+                                                            <MessagesFeature params={combinedParams} />
+                                                        </div>
+                                                        <AddMessage/>
+                                                    </>
+                                                )
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </div>

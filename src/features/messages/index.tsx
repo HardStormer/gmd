@@ -1,53 +1,65 @@
 import {useEffect, useState} from "react";
 import {
     getMessageListByRoomId,
-    getMessageListByText,
     GetMessageListByTextParams,
     Message,
     Messages,
     MessagesCard
 } from "../../entities";
 import LoadSpinner from "../../shared/ui/spinner";
-import {useLocation, useSearchParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import * as signalR from "@microsoft/signalr";
 
-const MessagesFeature = (request : GetMessageListByTextParams) => {
+interface ChatParams {
+    request: GetMessageListByTextParams; // Здесь используйте реальный тип, который содержит параметры запроса
+    searchInput: string;
+}
+
+const MessagesFeature = ({ params }: { params: ChatParams }) => {
+    const { request, searchInput } = params;
+
     const [messagesData, setMessagesData] = useState<Messages | null>(null);
 
     const location = useLocation();
 
     let text = ""
+    useEffect(() => {
+        let connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://messenger-api.guzeevmd.ru/messageHub", {
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets
+            })
+            .withAutomaticReconnect()
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
 
-    let connection = new signalR.HubConnectionBuilder()
-        .withUrl("https://messenger-api.guzeevmd.ru/messageHub", {
-            skipNegotiation: true,
-            transport: signalR.HttpTransportType.WebSockets
-        })
-        .withAutomaticReconnect()
-        .configureLogging(signalR.LogLevel.Information)
-        .build();
-
-    async function start() {
-        try {
-            await connection.start();
-            console.log("SignalR Connected.");
-        } catch (err) {
-            console.log("SignalR not connected retry...");
-            console.log(err);
-            setTimeout(start, 5000);
+        async function start() {
+            try {
+                await connection.start();
+                console.log("SignalR Connected.");
+            } catch (err) {
+                console.log("SignalR not connected retry...");
+                console.log(err);
+                setTimeout(start, 5000);
+            }
         }
-    }
 
-    connection.onclose(async () => {
-        await start();
-    });
+        connection.onclose(async () => {
+            await start();
+        });
 
-    start();
+        start();
 
-    connection.on("ReceiveMessage", (username: string, message: string) => {
-        console.log("working")
-        fetchData()
-    });
+        connection.on("ReceiveMessage", (username: string, message: string) => {
+            console.log("working")
+            fetchData()
+        });
+
+        return () => {
+            // Закрыть соединение при размонтировании компонента
+            connection.stop();
+        };
+    }, []);
 
     if (request != null){
         if (request.Text != null){

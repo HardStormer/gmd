@@ -34,7 +34,7 @@ const RoomsMyFeature = (request : GetRoomListByUserIdParams) => {
                     </div>) : (
                     roomsData.modelList.map( function (room : Room){
                         return(
-                            <RoomCard name={room.name} id={room.id}/>
+                            <RoomCard key={Math.floor(Math.random() * 200)} name={room.name} id={room.id}/>
                         )
                     })
                 )
