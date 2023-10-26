@@ -91,7 +91,7 @@ const AuthFeature = (request : RegisterData) => {
 
     return (
         <>
-            <div className="form">
+            <form className="form">
                 <div className="form-body">
                     <div className="login">
                         <label className="form-label" htmlFor="login">Логин </label>
@@ -112,7 +112,7 @@ const AuthFeature = (request : RegisterData) => {
                 <div className="footer">
                     <button onClick={fetchData} type="submit" className="btn">Зарегестрироваться</button>
                 </div>
-            </div>
+            </form>
         </>
     );
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
     createMessageByName,
     CreateMessageData,
@@ -12,6 +12,8 @@ const AddMessageFeature = (request : CreateMessageData) => {
     const [currentRoomData, setCurrentRoomData] = useState<Room | null>(null);
 
     const location = useLocation();
+
+    const addMessageInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         let roomId = new URLSearchParams(location.search).get("roomId");
@@ -60,19 +62,26 @@ const AddMessageFeature = (request : CreateMessageData) => {
         } catch (error) {
             console.error('Error create:', error);
         }
+        finally {
+            if (addMessageInputRef){
+                let element = addMessageInputRef.current
+                if (element)
+                    element.value = ""
+            }
+        }
     }
 
     return (
-        <>
+        <form>
             <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
-                <input type="text" className="form-control form-control-lg" id="messageTextInput"
+                <input ref={addMessageInputRef} type="text" className="form-control form-control-lg" id="messageTextInput"
                        placeholder="Написать сообщение..." onChange = {(e) => handleInputChange(e)}/>
                 <button onClick={fetchData} type="submit" className="btn btn-primary">Отправить</button>
                 {/*<a className="ms-1 text-muted" href="#!"><i className="fas fa-paperclip"></i></a>*/}
                 {/*<a className="ms-3 text-muted" href="#!"><i className="fas fa-smile"></i></a>*/}
                 {/*<a className="ms-3" href="#!"><i className="fas fa-paper-plane"></i></a>*/}
             </div>
-        </>
+        </form>
     );
 }
 

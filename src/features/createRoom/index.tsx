@@ -37,7 +37,7 @@ const CreateRoomFeature = (request : CreateRoomData) => {
 
     return (
         <>
-            <div className="form">
+            <form className="form">
                 <div className="form-body">
                     <div className="name">
                         <label className="form-label" htmlFor="login">Имя </label>
@@ -47,7 +47,7 @@ const CreateRoomFeature = (request : CreateRoomData) => {
                 <div className="footer">
                     <button onClick={fetchData} type="submit" className="btn">Создать</button>
                 </div>
-            </div>
+            </form>
         </>
     );
 }

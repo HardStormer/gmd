@@ -76,7 +76,7 @@ const AuthFeature = (request : LogInData) => {
 
     return (
         <>
-            <div className="form">
+            <form className="form">
                 <div className="form-body">
                     <div className="login">
                         <label className="form-label" htmlFor="login">Логин </label>
@@ -92,7 +92,7 @@ const AuthFeature = (request : LogInData) => {
                 <div className="footer">
                     <button onClick={fetchData} type="submit" className="btn">Войти</button>
                 </div>
-            </div>
+            </form>
         </>
     );
 }
