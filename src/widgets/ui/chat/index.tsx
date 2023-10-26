@@ -1,5 +1,5 @@
 import {SearchFormChat} from "../../../shared";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import MessagesFeature from "../../../features/messages";
 import RoomsFeature from "../../../features/rooms";
 import {Link, useLocation} from "react-router-dom";
@@ -17,6 +17,8 @@ const ChatWidget = () => {
     }
     useEffect(() => {
     }, [searchInput, setSearchInput]);
+
+    const messagesScrollRef = useRef(null);
 
     const [currentRoomData, setCurrentRoomData] = useState<Room | null>(null);
 
@@ -50,6 +52,7 @@ const ChatWidget = () => {
         request: {
         },
         searchInput: searchInput,
+        scrollRef: messagesScrollRef
     };
     return (
         <section >
@@ -97,7 +100,7 @@ const ChatWidget = () => {
                                                 (
                                                     <>
                                                         Комната: {currentRoomData?.name}
-                                                        <div id={"messagesScroll"} className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{
+                                                        <div ref={messagesScrollRef} id="messagesScroll" className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{
                                                             display: "flex",flexDirection: "column-reverse", maxHeight: "300px", overflowY: "scroll"}}>
                                                             <MessagesFeature params={combinedParams} />
                                                         </div>
