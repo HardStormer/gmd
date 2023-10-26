@@ -1,13 +1,16 @@
 import React, {useState} from "react";
 import {
     logIn,
-    LogInData
+    LogInData, ValidationError
 } from "../../entities";
 import {useNavigate} from "react-router";
 
 const AuthFeature = (request : LogInData) => {
     const [login, setLogin] = useState(String);
     const [password,setPassword] = useState(String);
+
+    const [loginValidError, setLoginValidError] = useState(String);
+    const [passwordValidError,setPasswordValidError] = useState(String);
 
     const navigate = useNavigate()
 
@@ -47,7 +50,27 @@ const AuthFeature = (request : LogInData) => {
                 navigate(-1);
             }
         } catch (error) {
-            console.error('Error auth:', error);
+            try {
+                let validationError: ValidationError = (error as ValidationError)
+                if (validationError.errors !== null) {
+                    let loginError = validationError.errors?.Login
+                    if (loginError !== null && loginError !== undefined) {
+                        setLoginValidError(loginError.toString())
+                    }
+                    else {
+                        setLoginValidError("")
+                    }
+                    let passwordError = validationError.errors?.Password
+                    if (passwordError !== null && passwordError !== undefined) {
+                        setPasswordValidError(passwordError.toString())
+                    }
+                    else {
+                        setLoginValidError("")
+                    }
+                }
+            } catch (error) {
+                console.error('Error auth:', error);
+            }
         }
     }
 
@@ -57,11 +80,13 @@ const AuthFeature = (request : LogInData) => {
                 <div className="form-body">
                     <div className="login">
                         <label className="form-label" htmlFor="login">Логин </label>
-                        <input  type="login" id="login" className="form-control" value={login} onChange = {(e) => handleInputChange(e)} placeholder="Логин"/>
+                        <input  type="login" id="login" className={loginValidError ? "form-control is-invalid" : "form-control"} value={login} onChange = {(e) => handleInputChange(e)} placeholder="Логин"/>
+                        <div className="invalid-feedback">{loginValidError}</div>
                     </div>
                     <div className="password">
                         <label className="form-label" htmlFor="password">Пароль </label>
-                        <input className="form-control" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Пароль"/>
+                        <input className={passwordValidError ? "form-control is-invalid" : "form-control"} type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Пароль"/>
+                        <div className="invalid-feedback">{passwordValidError}</div>
                     </div>
                 </div>
                 <div className="footer">

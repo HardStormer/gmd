@@ -33,10 +33,13 @@ export async function httpClient<TResponce>(
                         console.error(error.response.data);
                         console.error(error.response.status);
                         console.error(error.response.headers);
+                        throw error.response.data
                     } else if (error.request) {
                         console.log(error.request);
+                        throw error.response.data
                     } else {
                         console.log('Error', error.message);
+                        throw error.response.data
                     }
                     console.log(error.config);
                 }
@@ -50,17 +53,19 @@ export async function httpClient<TResponce>(
                         if (error.response.data.status === 400)
                         {
                             console.error(error.response.data);
-                            return error.response.data
+                            throw error.response.data
                         }
                         if (error.response) {
                             console.error(error.response.data);
                             // console.error(error.response.status);
                             // console.error(error.response.headers);
+                            throw error.response.data
                         } else if (error.request) {
                             console.log(error.request);
                         } else {
                             // Произошло что-то при настройке запроса, вызвавшее ошибку
                             console.log('Error', error.message);
+                            throw error.response.data
                         }
                         // console.log(error.config);
                     }
@@ -75,16 +80,18 @@ export async function httpClient<TResponce>(
                             console.error(error.response.data);
                             console.error(error.response.status);
                             console.error(error.response.headers);
+                            throw error.response.data
                         } else if (error.request) {
                             console.log(error.request);
+                            throw error.response.data
                         } else {
                             console.log('Error', error.message);
+                            throw error.response.data
                         }
-                        console.log(error.config);
                     }
                 ));
         case 'delete':
-            return (await axios.delete(resultUrl, { params })
+            return (await axios.delete(resultUrl, data)
                 .then(response => {
                     return  response.data
                 })
@@ -93,12 +100,14 @@ export async function httpClient<TResponce>(
                             console.error(error.response.data);
                             console.error(error.response.status);
                             console.error(error.response.headers);
+                            throw error.response.data
                         } else if (error.request) {
                             console.log(error.request);
+                            throw error.response.data
                         } else {
                             console.log('Error', error.message);
+                            throw error.response.data
                         }
-                        console.log(error.config);
                     }
                 ));
         default:

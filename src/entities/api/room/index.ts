@@ -74,7 +74,7 @@ export async function editRoomByName(data: EditRoomData) : Promise<EditRoomRespo
 }
 
 
-export async function deleteRoomByName(data: DeleteRoomData) : Promise<DeleteRoomResponse>{
+export async function deleteRoomById(data: DeleteRoomData) : Promise<DeleteRoomResponse>{
     let response = httpClient<DeleteRoomResponse>(
         method.delete,
         "/Room/Delete",

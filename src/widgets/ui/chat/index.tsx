@@ -1,5 +1,5 @@
 import {SearchFormChat} from "../../../shared";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import MessagesFeature from "../../../features/messages";
 import RoomsFeature from "../../../features/rooms";
 import {Link, useLocation} from "react-router-dom";
@@ -7,6 +7,7 @@ import Button from "../../../shared/ui/button";
 import RoomsMyFeature from "../../../features/roomsMy";
 import {getMessageListByRoomId, getRoomById, Messages, Room} from "../../../entities";
 import AddMessage from "../../../features/addMessage";
+import {Scrollbar} from "react-scrollbars-custom";
 
 const ChatWidget = () => {
 
@@ -47,7 +48,7 @@ const ChatWidget = () => {
     return (
         <section >
             {/*style="background-color: #CDC4F9;"*/}
-            <div className="container py-5">
+            <div className="container py-5" >
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card border-2" id="chat3" >
@@ -57,9 +58,12 @@ const ChatWidget = () => {
                                     <div className="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
                                         <div className="p-3">
                                             Мои комнаты:
-                                            <RoomsMyFeature key={Math.floor(Math.random() * 200)} />
+
+                                            <div data-mdb-perfect-scrollbar-y="true" style={{height: "150px", overflowY: "scroll"}}>
+                                                <RoomsMyFeature key={Math.floor(Math.random() * 200)} />
+                                            </div>
                                             <SearchFormChat value={searchInput} onChange={handleChange}/>
-                                            <div data-mdb-perfect-scrollbar="true" >
+                                            <div data-mdb-perfect-scrollbar="true" style={{maxHeight: "150px", overflowY: "scroll"}}>
                                                 {/*style="position: relative; height: 400px"*/}
                                                 <ul className="list-unstyled mb-0">
                                                     <RoomsFeature Name={searchInput} key={Math.floor(Math.random() * 200)} />
@@ -71,7 +75,7 @@ const ChatWidget = () => {
                                     <div className="col-md-6 col-lg-7 col-xl-8">
                                         Комната: {currentRoomData?.name}
 
-                                        <div className="pt-3 pe-3" data-mdb-perfect-scrollbar="true">
+                                        <div id={"messagesScroll"} className="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style={{maxHeight: "300px", overflowY: "scroll"}}>
                                             <MessagesFeature/>
                                         </div>
                                         <AddMessage/>

@@ -55,7 +55,7 @@ export async function editMessageByName(data: EditMessageData) : Promise<EditMes
 }
 
 
-export async function deleteMessageByName(data: DeleteMessageData) : Promise<DeleteMessageResponse>{
+export async function deleteMessageById(data: DeleteMessageData) : Promise<DeleteMessageResponse>{
     let response = httpClient<DeleteMessageResponse>(
         method.delete,
         "/Message/Delete",

@@ -54,6 +54,10 @@ const MessagesFeature = (request : GetMessageListByTextParams) => {
                     messagesData.modelList.map( function (message : Message){
                         {
                             i++;
+                            let messagesScrollDiv = document.getElementById("messagesScroll");
+                            if (messagesScrollDiv != null){
+                                messagesScrollDiv.scrollTop = messagesScrollDiv.scrollHeight;
+                            }
                         }
                         return(
                             <MessagesCard text={message.text} isRead={message.isRead} isMy={message.isMy} id={message.id} createdAt={message.createdAt} isEdited={message.isEdited} user={message.user} key={i}/>

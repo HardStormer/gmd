@@ -1,13 +1,35 @@
 import {Message} from "../../model";
+import {deleteMessageById, deleteRoomById} from "../../api";
 
 export const MessagesCard = ( message : Message ) => {
+    function convertUTCDateToLocalDate(date : Date) {
+        let newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+        let offset = date.getTimezoneOffset() / 60;
+        let hours = date.getHours();
+
+        newDate.setHours(hours - offset);
+
+        return newDate;
+    }
     let messageDate : string
     if (message.createdAt !== undefined){
-        messageDate = new Date(message.createdAt).toLocaleString("ru-RU")
+        messageDate = convertUTCDateToLocalDate(new Date(message.createdAt)).toLocaleString("ru-RU")
     }
     else {
         messageDate = ""
     }
+
+    async function deleteMessage() {
+        try {
+            if (message.id !== null){
+                await deleteMessageById({messageId: message.id });
+            }
+        } catch (error) {
+            console.error('Error deleting:', error);
+        }
+    }
+
     switch (message.isMy){
         case true:
             return (
@@ -19,6 +41,7 @@ export const MessagesCard = ( message : Message ) => {
                         </p>
                         <p className="small me-3 mb-3 rounded-3 text-muted">{messageDate}</p>
                     </div>
+                    <button type="button" className="btn-close" aria-label="Удалить" onClick={deleteMessage}></button>
                 </div>
             )
         case false:
