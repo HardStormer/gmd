@@ -9,6 +9,7 @@ import LoadSpinner from "../../shared/ui/spinner";
 import {useLocation} from "react-router-dom";
 import * as signalR from "@microsoft/signalr";
 import {components} from "../../../generated/privateMessanger-api-types-v1";
+import message from "../../entities/ui/message";
 
 interface ChatParams {
     request: GetMessageListByTextParams;
@@ -20,8 +21,10 @@ const MessagesFeature = ({ params }: { params: ChatParams }) => {
     const { request, searchInput } = params;
 
     const [messagesData, setMessagesData] = useState<components["schemas"]["MessageViewModel"][] | null>(null);
-    const [messageCount, setMessageCount] = useState(10);
+    const [allMessageCount, setAllMessageCount] = useState(0);
+    const [messageCount, setMessageCount] = useState(0);
     const [loadingMore, setLoadingMore] = useState(false);
+    const [needUpdate, setNeedUpdate] = useState(false);
 
     const location = useLocation();
 
@@ -63,7 +66,7 @@ const MessagesFeature = ({ params }: { params: ChatParams }) => {
 
         connection.on("ReceiveMessage", (username: string, message: string) => {
             console.log("working")
-            fetchData()
+            setNeedUpdate(true)
         });
 
         return () => {
@@ -71,37 +74,43 @@ const MessagesFeature = ({ params }: { params: ChatParams }) => {
         };
     }, []);
 
-    async function fetchData() {
-        try {
-            if (roomId !== null){
-                const messages = await getMessageListByRoomId({RoomId: roomId });
-                if (messages.modelList)
-                    setMessagesData(messages?.modelList);
+    useEffect(() => {
+        async function fetchMoreMessages(messageCount : number) {
+            try {
+                if (roomId !== null){
+                    const response = await getMessageListByRoomId({RoomId: roomId, Limit: 10, Offset: messageCount})
+                    const newMessages = response?.modelList
+                    setMessagesData(prevCount => prevCount = [...(prevCount || []), ...(newMessages || [])])
+                }
+            } catch (error) {
+                console.error('Error fetching messages data:', error);
             }
-        } catch (error) {
-            console.error('Error fetching rooms data:', error);
+            finally {
+                setMessageCount(prevState =>  prevState + 10)
+            }
         }
-    }
-    useEffect(() => {
-        fetchData();
-    }, [location]);
-    useEffect(() => {
+        const loadMoreMessages = async () => {
+            console.log(allMessageCount)
+            console.log(messageCount)
+            if (!loadingMore && allMessageCount > messageCount) {
+                setLoadingMore(true);
+                try {
+                    await fetchMoreMessages(messageCount);
+                } catch (error) {
+                    console.error('Error fetching more messages:', error);
+                } finally {
+                    setLoadingMore(false);
+                }
+            }
+        };
         function handleScroll() {
-            // if (messagesScrollRef.current){
-            //     console.log(`scrollTop = ${messagesScrollRef.current.scrollTop}`)
-            //     console.log(`scrollHeight = ${messagesScrollRef.current.scrollHeight}`)
-            //     console.log(`clientHeight = ${messagesScrollRef.current.clientHeight}`)
-            //     console.log(`scrollHeight - clientHeight = ${messagesScrollRef.current.clientHeight - messagesScrollRef.current.scrollHeight}`)
-            //     console.log(`scrollHeight - clientHeight - 20 = ${messagesScrollRef.current.clientHeight - messagesScrollRef.current.scrollHeight + 20}`)
-            // }
             if (
                 messagesScrollRef.current && messagesScrollRef.current.scrollTop <=
-                messagesScrollRef.current.clientHeight - messagesScrollRef.current.scrollHeight + 20
+                messagesScrollRef.current.clientHeight - messagesScrollRef.current.scrollHeight + 1
             ) {
                 loadMoreMessages();
             }
         }
-        console.log(messagesScrollRef)
         if (messagesScrollRef.current) {
             messagesScrollRef.current.addEventListener("scroll", handleScroll);
         }
@@ -110,36 +119,30 @@ const MessagesFeature = ({ params }: { params: ChatParams }) => {
                 messagesScrollRef.current.removeEventListener("scroll", handleScroll);
             }
         };
-    }, []);
+    }, [allMessageCount, messageCount, messagesData]);
 
-    const loadMoreMessages = async () => {
-        if (!loadingMore) {
-            setLoadingMore(true);
+    useEffect(() => {
+        async function fetchData() {
             try {
-                await fetchMoreMessages(messageCount);
+                if (roomId !== null){
+                    const messages = await getMessageListByRoomId({RoomId: roomId });
+                    if (messages.modelList){
+                        setMessagesData(messages.modelList);
+                        let length = messages.modelList.length
+                        setMessageCount(length);
+                    }
+                    if (messages.totalCount){
+                        setAllMessageCount(messages.totalCount)
+                    }
+                }
             } catch (error) {
-                console.error('Error fetching more messages:', error);
-            } finally {
-                setLoadingMore(false);
+                console.error('Error fetching rooms data:', error);
             }
         }
-    };
 
-    async function fetchMoreMessages(messageCount : number) {
-        try {
-            if (roomId !== null){
-                const response = await getMessageListByRoomId({RoomId: roomId, Limit: 10, Offset: messageCount - 1 })
-
-                const newMessages = response?.modelList
-
-                setMessagesData(prevCount => prevCount = [...(prevCount || []), ...(newMessages || [])])
-
-                setMessageCount(prevCount => prevCount + 10)
-            }
-        } catch (error) {
-            console.error('Error fetching messages data:', error);
-        }
-    }
+        fetchData();
+        setNeedUpdate(false)
+    }, [location, needUpdate]);
 
     return (
         <>
