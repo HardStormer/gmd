@@ -91,7 +91,7 @@ export async function httpClient<TResponce>(
                     }
                 ));
         case 'delete':
-            return (await axios.delete(resultUrl, data)
+            return (await axios.post(resultUrl, data)
                 .then(response => {
                     return  response.data
                 })

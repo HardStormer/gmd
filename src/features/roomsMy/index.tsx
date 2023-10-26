@@ -26,7 +26,7 @@ const RoomsMyFeature = (request : GetRoomListByUserIdParams) => {
     }, []);
 
     return (
-        <>
+        <div id={"myRooms"}>
             {!roomsData ? (<LoadSpinner/>) : (
                 !roomsData.modelList ? (
                     <div className="alert alert-warning" role="alert">
@@ -40,7 +40,7 @@ const RoomsMyFeature = (request : GetRoomListByUserIdParams) => {
                 )
 
             )}
-        </>
+        </div>
     );
 }
 

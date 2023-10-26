@@ -9,6 +9,7 @@ import {
 } from "../../entities";
 import LoadSpinner from "../../shared/ui/spinner";
 import {useLocation, useSearchParams} from "react-router-dom";
+import * as signalR from "@microsoft/signalr";
 
 const MessagesFeature = (request : GetMessageListByTextParams) => {
     const [messagesData, setMessagesData] = useState<Messages | null>(null);
@@ -17,28 +18,58 @@ const MessagesFeature = (request : GetMessageListByTextParams) => {
 
     let text = ""
 
+    let connection = new signalR.HubConnectionBuilder()
+        .withUrl("https://messenger-api.guzeevmd.ru/messageHub", {
+            skipNegotiation: true,
+            transport: signalR.HttpTransportType.WebSockets
+        })
+        .withAutomaticReconnect()
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    async function start() {
+        try {
+            await connection.start();
+            console.log("SignalR Connected.");
+        } catch (err) {
+            console.log("SignalR not connected retry...");
+            console.log(err);
+            setTimeout(start, 5000);
+        }
+    }
+
+    connection.onclose(async () => {
+        await start();
+    });
+
+    start();
+
+    connection.on("ReceiveMessage", (username: string, message: string) => {
+        console.log("working")
+        fetchData()
+    });
+
     if (request != null){
         if (request.Text != null){
             text = request.Text
         }
     }
-    useEffect(() => {
-        let roomId = new URLSearchParams(location.search).get("roomId");
 
-        async function fetchData() {
-            try {
-                if (roomId !== null){
-                    const messages = await getMessageListByRoomId({RoomId: roomId });
-                    setMessagesData(messages);
-                }
-                else {
-                    setMessagesData(null)
-                }
-            } catch (error) {
-                console.error('Error fetching rooms data:', error);
+    let roomId = new URLSearchParams(location.search).get("roomId");
+    async function fetchData() {
+        try {
+            if (roomId !== null){
+                const messages = await getMessageListByRoomId({RoomId: roomId });
+                setMessagesData(messages);
             }
+            else {
+                setMessagesData(null)
+            }
+        } catch (error) {
+            console.error('Error fetching rooms data:', error);
         }
-
+    }
+    useEffect(() => {
         fetchData();
     }, [location]);
 

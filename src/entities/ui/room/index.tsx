@@ -32,9 +32,9 @@ export const RoomCard = (room : Room) => {
     }
 
     return(
-        <div className="p-2 border-bottom">
-            <a href={roomHref} className="d-flex justify-content-between">
-                <div className="d-flex flex-row">
+        <div id={room.id} className="p-2 border-bottom">
+            <a href={roomHref} id={room.id} className="d-flex justify-content-between">
+                <div id={room.id} className="d-flex flex-row">
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <Modal.Title>Сообщение</Modal.Title>
