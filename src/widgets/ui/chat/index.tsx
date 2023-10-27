@@ -11,6 +11,12 @@ const ChatWidget = () => {
 
     const [searchInput, setSearchInput] = useState("");
 
+    let token = localStorage.getItem('access_token')
+
+    if (token === null){
+        window.location.replace(`#/login`)
+    }
+
     const handleChange = (e : any) => {
         console.log(e.target.value)
         setSearchInput(e.target.value);
